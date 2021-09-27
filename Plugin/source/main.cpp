@@ -1,8 +1,8 @@
 #include <switch_min.h>
 
-#include "saltysd/SaltySD_core.h"
-#include "saltysd/SaltySD_ipc.h"
-#include "saltysd/SaltySD_dynamic.h"
+#include "saltysd/saltysd_core.h"
+#include "saltysd/saltysd_ipc.h"
+#include "saltysd/saltysd_dynamic.h"
 
 extern "C" {
 	extern u32 __start__;
@@ -147,7 +147,7 @@ uint8_t GetOperationMode() {
 int main(int argc, char *argv[]) {
 	SaltySD_printf("SaltySD ReverseNX-RT %s: alive\n", ver);
 	
-	FILE* offset = SaltySDCore_fopen("sdmc:/SaltySD/ReverseNX-RT.hex", "wb");
+	FILE* offset = SaltySDCore_fopen("sdmc:/switch/SaltySD/ReverseNX-RT.hex", "wb");
 	uint64_t ptr = (uint64_t)&isDocked;
 	SaltySDCore_fwrite(&ptr, 0x5, 1, offset);
 	ptr = (uint64_t)&def;

@@ -95,7 +95,7 @@ public:
 		if (MAGIC == 0x06BA7E39) {
 			auto *clickableListItem = new tsl::elm::ListItem("Change system control");
 			clickableListItem->setClickListener([](u64 keys) { 
-				if (keys & KEY_A) {
+				if (keys & HidNpadButton_A) {
 					if (PluginRunning == true) {
 						def = !def;
 						if (dmntcht == true) {
@@ -120,7 +120,7 @@ public:
 			
 			auto *clickableListItem2 = new tsl::elm::ListItem("Change mode");
 			clickableListItem2->setClickListener([](u64 keys) { 
-				if (keys & KEY_A) {
+				if (keys & HidNpadButton_A) {
 					if (PluginRunning == true && def == false) {
 						isDocked =! isDocked;
 						if (dmntcht == true) {
@@ -145,13 +145,13 @@ public:
 		else if (SaltySD == true && plugin == true && check == false) {
 			auto *clickableListItem = new tsl::elm::ListItem("(De)activate plugin");
 			clickableListItem->setClickListener([](u64 keys) { 
-				if (keys & KEY_A) {
+				if (keys & HidNpadButton_A) {
 					if (bak == false) {
-						rename("sdmc:/SaltySD/plugins/ReverseNX-RT.elf", "sdmc:/SaltySD/plugins/ReverseNX-RT.elf.bak");
+						rename("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf", "sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf.bak");
 						bak = true;
 					}
 					else {
-						rename("sdmc:/SaltySD/plugins/ReverseNX-RT.elf.bak", "sdmc:/SaltySD/plugins/ReverseNX-RT.elf");
+						rename("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf.bak", "sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf");
 						bak = false;
 					}
 					return true;
@@ -173,7 +173,7 @@ public:
 	virtual void update() override {
 		static uint8_t i = 0;
 		if (R_FAILED(pmdmntGetApplicationProcessId(&PID)) && PluginRunning == true) {
-			remove("sdmc:/SaltySD/ReverseNX-RT.hex");
+			remove("sdmc:/switch/SaltySD/ReverseNX-RT.hex");
 			PluginRunning = false;
 			check = false;
 			closed = true;
@@ -202,7 +202,7 @@ public:
 	}
 
 	// Called once every frame to handle inputs not handled by other UI elements
-	virtual bool handleInput(u64 keysDown, u64 keysHeld, touchPosition touchInput, JoystickPosition leftJoyStick, JoystickPosition rightJoyStick) override {
+	virtual bool handleInput(u64 keysDown, u64 keysHeld, const HidTouchState &touchInput, HidAnalogStickState leftJoyStick, HidAnalogStickState rightJoyStick) override {
 		return false;   // Return true here to singal the inputs have been consumed
 	}
 };
@@ -217,14 +217,14 @@ public:
 		SaltySD = CheckPort();
 		if (SaltySD == false) return;
 		
-		FILE* temp = fopen("sdmc:/SaltySD/plugins/ReverseNX-RT.elf", "r");
+		FILE* temp = fopen("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf", "r");
 		if (temp != NULL) {
 			fclose(temp);
 			plugin = true;
 			sprintf(PluginChar, "ReverseNX-RT plugin is activated.");
 		}
 		else {
-			temp = fopen("sdmc:/SaltySD/plugins/ReverseNX-RT.elf.bak", "r");
+			temp = fopen("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf.bak", "r");
 			if (temp != NULL) {
 				fclose(temp);
 				plugin = true;
@@ -234,11 +234,11 @@ public:
 			else return;
 		}
 
-		if (R_FAILED(pmdmntGetApplicationProcessId(&PID))) remove("sdmc:/SaltySD/ReverseNX-RT.hex");
+		if (R_FAILED(pmdmntGetApplicationProcessId(&PID))) remove("sdmc:/switch/SaltySD/ReverseNX-RT.hex");
 		else {
 			check = true;
 			svcSleepThread(1'000'000'000);
-			FILE* offset = fopen("sdmc:/SaltySD/ReverseNX-RT.hex", "rb");
+			FILE* offset = fopen("sdmc:/switch/SaltySD/ReverseNX-RT.hex", "rb");
 			if (offset != NULL) {
 				fread(&docked_address, 0x5, 1, offset);
 				fread(&def_address, 0x5, 1, offset);

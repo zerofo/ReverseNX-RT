@@ -145,12 +145,12 @@ public:
 			clickableListItem->setClickListener([](u64 keys) { 
 				if (keys & HidNpadButton_A) {
 					if (!bak) {
-						rename("sdmc:/SaltySD/plugins/ReverseNX-RT.elf", "sdmc:/SaltySD/plugins/ReverseNX-RT.elf.bak");
+						rename("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf", "sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf.bak");
 						bak = true;
 						sprintf(PluginChar, "ReverseNX-RT plugin is activated.");
 					}
 					else {
-						rename("sdmc:/SaltySD/plugins/ReverseNX-RT.elf.bak", "sdmc:/SaltySD/plugins/ReverseNX-RT.elf");
+						rename("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf.bak", "sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf");
 						bak = false;
 						sprintf(PluginChar, "ReverseNX-RT plugin is deactivated.");
 					}
@@ -213,14 +213,14 @@ public:
 			SaltySD = CheckPort();
 			if (!SaltySD) return;
 
-			FILE* temp = fopen("sdmc:/SaltySD/plugins/ReverseNX-RT.elf", "rb");
+			FILE* temp = fopen("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf", "rb");
 			if (temp) {
 				fclose(temp);
 				plugin = true;
 				sprintf(PluginChar, "ReverseNX-RT plugin is activated.");
 			}
 			else {
-				temp = fopen("sdmc:/SaltySD/plugins/ReverseNX-RT.elf.bak", "rb");
+				temp = fopen("sdmc:/switch/SaltySD/plugins/ReverseNX-RT.elf.bak", "rb");
 				if (temp) {
 					fclose(temp);
 					plugin = true;

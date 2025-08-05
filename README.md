@@ -2,7 +2,7 @@
 
 Alternative version of ReverseNX that can switch between handheld and docked mode in **R**eal **T**ime.
 
-Requires SaltyNX 0.7.0+ and Tesla environment installed. Links at the end of readme.
+Requires SaltyNX 1.4.3+ and Tesla environment installed. Links at the end of readme.
 
 It's compatible with ReverseNX patches/ReverseNX-Tool 2.0.0+.
 
@@ -23,9 +23,12 @@ Overlay contains multiple modes, from which 2 are main ones, other are error not
 
 You have only two options here:
 * Change system control (It also refers to ReverseNX-Tool flags - f.e. if you have docked flag set for this game in ReverseNX-Tool, when system control is enabled, it will force docked mode)
-* Change mode (disabled if system control is enabled)
+* Change mode (doesn't show up if system control is enabled)
+* Change Handheld DDR (doesn't show up if system control is enabled and if game didn't use GetDefaultDisplayResolution even once)
+* Change Docked DDR (doesn't show up if system control is enabled and if game didn't use GetDefaultDisplayResolution even once)
+* Save settings
 
-Game stays in current configuration until you will close game.
+Some games utilize Default Display Resolution to set game's output resolution. List of known compatible games is at the bottom of README. Some games may use that function, but do nothing with the result (For example `Dragon Ball: Xenoverse 2`)
 
 ---
 
@@ -35,6 +38,7 @@ Game stays in current configuration until you will close game.
 - **ReverseNX-RT is not running!** - plugin was not injected. It's either 32-bit game or is in SaltyNX exceptions list.
 - **Game doesn't support changing modes!** - plugin was injected and is working, but function for checking modes was not used. Either game doesn't have one (which means there is no difference between handheld and docked) or game just checks it later than when you wanted to check (for example game may not use it for few seconds after booting was finished). You need to exit from overlay and run it again later to check if error still occurs...
 - **WRONG MAGIC!** - something went horribly wrong and overlay is reading value from wrong memory position. It should not happen if you are opening overlay after game boot process will finish. It may also happen if you will close overlay before closing game and open it after running next game, this time not compatible with SaltyNX.
+- **Defauly Display Resolution was not checked!** - if it shows up, it means you won't have access to `Change Handheld DDR` and `Change Docked DDR` since resolutions are hardcoded.
 
 # Troubleshooting:
 List of titles having compability issues with ReverseNX-RT:
@@ -52,3 +56,13 @@ A: Atmosphere 0.12.0 with new options for cheat engine bringed bug that causes s
 - https://github.com/masagrator/SaltyNX/releases
 - https://github.com/WerWolv/nx-ovlloader
 - https://github.com/WerWolv/Tesla-Menu
+
+# List of known DDR games
+| Title | Tested version | Only Docked/Only Handheld/Both | Comments |
+| ------------- | ------------- | ------------- | ------------- |
+| Card-en-Ciel | 1.5.3 | Both |  |
+| CelDamage HD | 1.0.0 | Both |  |
+| EA SPORTS FC 24 | 1.5a.9115 | Only Docked | If anything else than 1080p is set, game targets 720p |
+| EA SPORTS FC 25 | 1.7d.c638 | Only Docked | If anything else than 1080p is set, game targets 720p |
+| Flooded | 1.0.1 | Both |  |
+| Red Dead Redemption | 1.0.4 | Both |  |

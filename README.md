@@ -4,12 +4,6 @@ Alternative version of ReverseNX that can switch between handheld and docked mod
 
 Requires SaltyNX 1.4.3+ and Tesla environment installed. Links at the end of readme.
 
-It's compatible with ReverseNX patches/ReverseNX-Tool 2.0.0+.
-
-It's not compatible with deprecated ReverseNX plugin.
-
-**Do not use ReverseNX-RT next to Status Monitor 0.6.0 or older** (Tesla can crash on Atmosphere if you are using NX-FPS)
-
 I'm not planning to add any more functionality to it. Next updates will only contain bug fixes.
 
 Overlay contains multiple modes, from which 2 are main ones, other are error notifications.
@@ -24,11 +18,17 @@ Overlay contains multiple modes, from which 2 are main ones, other are error not
 You have only two options here:
 * Change system control (It also refers to ReverseNX-Tool flags - f.e. if you have docked flag set for this game in ReverseNX-Tool, when system control is enabled, it will force docked mode)
 * Change mode (doesn't show up if system control is enabled)
+
+Additional options if it's detected that they can be compatible:
 * Change Handheld DDR (doesn't show up if system control is enabled and if game didn't use GetDefaultDisplayResolution even once)
 * Change Docked DDR (doesn't show up if system control is enabled and if game didn't use GetDefaultDisplayResolution even once)
+
+And:
 * Save settings
 
-Some games utilize Default Display Resolution to set game's output resolution. List of known compatible games is at the bottom of README. Some games may use that function, but do nothing with the result (For example `Dragon Ball: Xenoverse 2`)
+> DDR
+
+Some games utilize Default Display Resolution (DDR) to set game's output resolution. List of known compatible games can be found [HERE](https://github.com/masagrator/ReverseNX-RT/blob/compatible_games/README.md). Some games may use that function, but do nothing with the result (For example `Dragon Ball: Xenoverse 2`)
 
 ---
 
@@ -56,13 +56,3 @@ A: Atmosphere 0.12.0 with new options for cheat engine bringed bug that causes s
 - https://github.com/masagrator/SaltyNX/releases
 - https://github.com/WerWolv/nx-ovlloader
 - https://github.com/WerWolv/Tesla-Menu
-
-# List of known DDR games
-| Title | Tested version | Only Docked/Only Handheld/Both | Comments |
-| ------------- | ------------- | ------------- | ------------- |
-| Card-en-Ciel | 1.5.3 | Both |  |
-| CelDamage HD | 1.0.0 | Both |  |
-| EA SPORTS FC 24 | 1.5a.9115 | Only Docked | If anything else than 1080p is set, game targets 720p |
-| EA SPORTS FC 25 | 1.7d.c638 | Only Docked | If anything else than 1080p is set, game targets 720p |
-| Flooded | 1.0.1 | Both |  |
-| Red Dead Redemption | 1.0.4 | Both |  |
